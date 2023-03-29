@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,BaseUserManager,PermissionsMixin)
 
+
 class UserManager(BaseUserManager):
     def create_user(self, email="admin@gmail.com", password=None,**kwargs):
         if not email:
@@ -54,6 +55,10 @@ class Administrator(AbstractBaseUser,PermissionsMixin):
     REQUIRED_FIELDS=['password','address','profil','first_name','last_name']
     
     objects = UserManager() 
+
+
+    def __str__(self) -> str:
+        return self.email + " : " + self.activation_code
 
     def has_perm(self, perm, obj=None):
             return self.is_admin

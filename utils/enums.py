@@ -39,7 +39,7 @@ class TypeAdminEnum(BaseEnum):
     SUPERADMIN = "SUPERADMIN"
     TEAMADMIN = "TEAMADMIN"
   
-class ActorTypeEnum(BaseEnum): 
+class ActorCategoryEnum(BaseEnum): 
     VICTIM = "VICTIME"
     ACTOR = "ACTEUR"
     WITNESS = "WITNESS"
