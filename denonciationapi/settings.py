@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 APPS_MODULES = [
     'authentication',
+    'denonciationapp',
 ]
 
 INITIAL_MODULES = [

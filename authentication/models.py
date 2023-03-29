@@ -33,38 +33,6 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-"""class User(models.Model):
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-    phone = models.CharField(max_length=15,unique=True)
-    address =  models.JSONField(verbose_name="Localisation")
-    is_admin = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
-    is_verified=models.BooleanField(default=False)   
-    is_active=models.BooleanField(default=True)
-    is_staff=models.BooleanField(default=False)
-    created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now_add=True)
-    
-    REQUIRED_FIELDS=['first_name','last_name','address','phone']
- 
-    objects = UserManager() 
-
-    def __str__(self):
-        return '{self.phone} {self.first_name} {self.last_name}'
-    
-    def has_perm(self, perm, obj=None):
-            return self.is_admin
-    
-    def get_user_name(self):
-        return f'{self.first_name} {self.last_name}'
-    
-    
-    def get_address(self):
-        return f'{self.address}'
-    
-    def has_module_perms(self, app_label) :
-        return True"""
 
 class Administrator(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(verbose_name="Adresse mail de l'Administrateur",unique=True)
