@@ -1,6 +1,7 @@
 from django.db import models
 from utils.enums import *
 
+from django.contrib.postgres.fields import ArrayField
 from authentication.models import Administrator
 
 
@@ -54,7 +55,7 @@ class Team(models.Model):
     contact = models.TextField(verbose_name="contact de l'Equipe")
     whatsapp = models.TextField(verbose_name="Numéro whatsapp de l'Equipe")
     address =  models.JSONField(verbose_name="Localisation")
-    responsable = models.OneToOneField(to=Administrator,related_name="step_actors")
+    responsable = models.OneToOneField(to=Administrator,on_delete=models.SET_NULL,null=True)
 
     def __str__(self) -> str:
         return  self.name 
@@ -63,7 +64,7 @@ class Team(models.Model):
 class Denonciation(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
-    pictures = models.ArrayField(models.ImageField(upload_to='images/denonciation_picture'), blank=True, null=True)
+    pictures = ArrayField(models.CharField(max_length=200))
     audio =  models.FileField(upload_to='audios/denonciation_audios',blank=True,null=True)
     file =  models.FileField(upload_to='files/denonciation_files',blank=True,null=True)
     status = models.CharField(max_length=200,choices=StatutDenoEnum.items(),default=StatutDenoEnum.PENDING)
@@ -83,7 +84,7 @@ class Step(models.Model):
     status = models.CharField(max_length=200,choices=EtapeStatutEnum.items(),default=EtapeStatutEnum.PENDING) 
     description = models.CharField(max_length=200)
     denonciation = models.ForeignKey(to=Denonciation,on_delete=models.SET_NULL,null=True) 
-    actors = models.OneToOneField(to=Actor,related_name="step_actors")
+    actors = models.ManyToManyField(to=Actor,related_name="step_actors")
     created_at=models.DateTimeField(auto_now_add=True)  
     updated_at=models.DateTimeField(auto_now_add=True) 
 
@@ -91,7 +92,7 @@ class Step(models.Model):
         return  f'{self.status} {self.denonciation}'
 
 class Publication(models.Model):  
-    type = models.CharField(max_length=200,choices=TypePublishEnumEnum.items(),default=TypePublishEnumEnum.PENDING) 
+    type = models.CharField(max_length=200,choices=TypePublishEnumEnum.items(),default=TypePublishEnumEnum.ACTUALITE) 
     content = models.TextField(verbose_name="Description de la publication")
     administrator = models.ForeignKey(to=Administrator,on_delete=models.SET_NULL,null=True)
     created_at=models.DateTimeField(auto_now_add=True)  
