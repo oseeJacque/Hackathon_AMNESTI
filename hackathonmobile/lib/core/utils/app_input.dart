@@ -6,13 +6,16 @@ class AppFieldInput extends StatelessWidget {
   final bool isPass;
   final String hintText;
   final TextInputType textInputType;
-  const AppFieldInput({
-    Key? key,
-    required this.textEditingController,
-    this.isPass = false,
-    required this.hintText,
-    required this.textInputType,
-  }) : super(key: key);
+  String? Function(String?)? validator;
+
+  AppFieldInput(
+      {Key? key,
+      required this.textEditingController,
+      this.isPass = false,
+      required this.hintText,
+      required this.textInputType,
+      this.validator})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,29 +25,30 @@ class AppFieldInput extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: AppColor.greySkyColor, 
-        borderRadius: BorderRadius.circular(10.0)
- ),
-      child: TextField(
+          color: AppColor.greySkyColor,
+          borderRadius: BorderRadius.circular(10.0)),
+      child: TextFormField(
         controller: textEditingController,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(color: AppColor.greyBlackColor),
           border: OutlineInputBorder(
-                  gapPadding: 10.0,
-                  borderSide:  BorderSide(
-                    color: AppColor.blueBgColor,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
+            gapPadding: 10.0,
+            borderSide: BorderSide(
+              color: AppColor.blueBgColor,
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
           focusedBorder: inputBorder,
           enabledBorder: inputBorder,
           filled: true,
           contentPadding: const EdgeInsets.all(8),
         ),
+        style: TextStyle(color: AppColor.blackColor),
         keyboardType: textInputType,
         obscureText: isPass,
+        validator: validator,
       ),
     );
   }
