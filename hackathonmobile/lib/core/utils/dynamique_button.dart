@@ -26,6 +26,7 @@ class DynamiqueButton extends StatelessWidget {
     return InkWell(
       onTap: action,
       child: Container(
+        alignment: Alignment.center,
         width: width,
         height: height,
         decoration: BoxDecoration(

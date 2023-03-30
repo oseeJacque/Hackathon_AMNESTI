@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:hackathonmobile/core/constants/colors.dart';
 import 'package:hackathonmobile/core/utils/app_text.dart';
 

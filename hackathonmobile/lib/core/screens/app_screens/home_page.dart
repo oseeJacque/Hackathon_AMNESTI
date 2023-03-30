@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hackathonmobile/core/constants/colors.dart';
+import 'package:hackathonmobile/core/screens/app_screens/acceuil_page.dart';
+import 'package:hackathonmobile/core/screens/app_screens/actualite_page.dart';
+import 'package:hackathonmobile/core/screens/app_screens/historique_page.dart';
 import 'package:hackathonmobile/core/utils/app_text.dart';
 import 'package:hackathonmobile/core/widgets/app_bar.dart';
 
 import '../../constants/assert.dart';
 import 'package:badges/badges.dart' as badges;
+
+import 'denonciation_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -15,12 +20,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Widget> _pageViewList=[];
+ final  List<Widget> _pageViewList=[
+    const DenonciationPage(), 
+    const AcceuilPage(),
+    const ActualitePage(),
+    const HistoriquePage()
+  ];
   final pageController=PageController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar:MyAppBar(), 
+    return Scaffold( 
       bottomNavigationBar: GNav(
         onTabChange: pageChange,
         backgroundColor: AppColor.greySkyColor,
