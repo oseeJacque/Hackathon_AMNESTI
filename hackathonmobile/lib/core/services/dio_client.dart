@@ -27,9 +27,6 @@ class DioClient {
     Map<String, String> res = {
       'Content-Type': 'application/json; charset=UTF-8',
     };
-    if (autorisation) {
-      res.addAll({'Authorization': 'Bearer $token'});
-    }
     return res;
   }
 
@@ -144,7 +141,6 @@ class DioClient {
   getHeaders() {
     Map<String, String> header = {
       'Accept': 'application/json',
-      "Authorization": 'Bearer $token',
       'Content-Type': 'multipart/form-data'
     };
     return header;
@@ -153,7 +149,6 @@ class DioClient {
   Future<dynamic> postFile({
     required FormData body,
     String url = '',
-    bool withAuthorization = false,
   }) async {
     Response result;
     try {
