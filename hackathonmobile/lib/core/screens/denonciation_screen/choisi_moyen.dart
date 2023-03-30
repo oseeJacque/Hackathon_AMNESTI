@@ -6,6 +6,9 @@ import 'package:hackathonmobile/core/widgets/app_bar.dart';
 
 import '../../utils/bottom_navigator.dart';
 import '../../widgets/floating_bouton.dart';
+import 'appel.dart';
+import 'formulaire_denonciation.dart';
+import 'note_vocal.dart';
 
 class ChoisirMoyenPage extends StatelessWidget {
   const ChoisirMoyenPage({super.key});
@@ -54,6 +57,7 @@ class ChoisirMoyenPage extends StatelessWidget {
 
               //Note vocal
               optionsCase(action: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>NoteVocalPage()));
               }, text: "Note vocal", 
               urlImage: AssetData.microphone2P,),
               SizedBox(
@@ -62,6 +66,9 @@ class ChoisirMoyenPage extends StatelessWidget {
 
               //Appel
               optionsCase(action: () {
+               
+                 Navigator.push(context, MaterialPageRoute(builder: (context)=> const AppelVocalScreen ()));
+
               }, text: "Appel", 
               urlImage: AssetData.phonBigP,), 
               SizedBox(
@@ -70,6 +77,9 @@ class ChoisirMoyenPage extends StatelessWidget {
 
               //Formulaire
               optionsCase(action: () {
+                
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const FormulaireDenonciationScreen ()));
+
               }, text: "Formulaire", 
               urlImage: AssetData.receipteditP,),
               SizedBox(
@@ -93,19 +103,22 @@ class ChoisirMoyenPage extends StatelessWidget {
       required VoidCallback action}) {
     return Column(
       children: [
-        Container(
-          width: 100,
-          height: 100,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: AppColor.blueBgColor,
-              width: 1,
+        InkWell(
+          onTap: action,
+          child: Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppColor.blueBgColor,
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(10),
             ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Image.asset(
-            urlImage,
-            color: AppColor.blueBgColor,
+            child: Image.asset(
+              urlImage,
+              color: AppColor.blueBgColor,
+            ),
           ),
         ),
         AppText(

@@ -33,10 +33,10 @@ class DynamiqueButton extends StatelessWidget {
             boxShadow: hasShadow
                 ? [
                     BoxShadow(
-                        color: AppColor.greyBlackColor,
-                        spreadRadius: 2.0,
+                        color: AppColor.blueBgColor,
+                        spreadRadius: 1.0,
                         offset: const Offset(0, 1),
-                        blurRadius: 10.0)
+                        blurRadius: 1.0)
                   ]
                 : null,
             color: bgColor,

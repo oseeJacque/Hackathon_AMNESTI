@@ -9,16 +9,20 @@ import 'package:hackathonmobile/core/widgets/app_bar.dart';
 import '../../constants/colors.dart';
 import '../../widgets/floating_bouton.dart';
 
-class NoteVocalPage extends StatefulWidget {
-  const NoteVocalPage({super.key});
+class AppelVocalScreen extends StatefulWidget {
+  const AppelVocalScreen({super.key});
 
   @override
-  State<NoteVocalPage> createState() => _NoteVocalPageState();
+  State<AppelVocalScreen> createState() => _AppelVocalScreenState();
 }
 
-class _NoteVocalPageState extends State<NoteVocalPage> {
+class _AppelVocalScreenState extends State<AppelVocalScreen> {
+  
+  @override
+  Widget build(BuildContext context) {
+  
 
-@override 
+    @override 
     void initState(){
       super.initState(); 
     }
@@ -28,9 +32,6 @@ class _NoteVocalPageState extends State<NoteVocalPage> {
       super.dispose(); 
      
     }
-
-  @override
-  Widget build(BuildContext context) {   
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -46,8 +47,8 @@ class _NoteVocalPageState extends State<NoteVocalPage> {
           margin: EdgeInsets.symmetric(vertical: height*.05,horizontal: width*.03),
           child: Column(
             children: [
-              AppText("Note vocale",color: AppColor.blueBgColor,size: 20.0,weight: FontWeight.bold,), 
-              SizedBox(height: height*.2,), 
+              AppText("Appel",color: AppColor.blueBgColor,size: 20.0,weight: FontWeight.bold,), 
+              SizedBox(height: height*.3,), 
               InkWell(
           onTap: (){},
           child: Container(
@@ -61,7 +62,7 @@ class _NoteVocalPageState extends State<NoteVocalPage> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Image.asset(
-              AssetData.microphone2P,
+              AssetData.phonBigP,
               color: AppColor.blueBgColor,
             ),
 
@@ -69,11 +70,12 @@ class _NoteVocalPageState extends State<NoteVocalPage> {
 
           ),
         ),
-        SizedBox(height: height*.05,),
-        Image.asset(AssetData.progressionP), 
-        SizedBox(height: height*.05,),
+        
+        SizedBox(height: height*.1,),
+
        AppText("00:02",color: AppColor.blueBgColor,size: 30.0,weight: FontWeight.bold,), 
         SizedBox(height: height*.1,),
+       
         //Dénoncer button
         DynamiqueButton(
           childs: const AppText("Dénoncer",size: 20.0,weight: FontWeight.w700,), 

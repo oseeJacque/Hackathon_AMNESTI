@@ -6,12 +6,14 @@ class AppFieldInput extends StatelessWidget {
   final bool isPass;
   final String hintText;
   final TextInputType textInputType;
+  final bool multiLine;
   const AppFieldInput({
     Key? key,
     required this.textEditingController,
     this.isPass = false,
     required this.hintText,
-    required this.textInputType,
+    required this.textInputType, 
+    this.multiLine=false,
   }) : super(key: key);
 
   @override
@@ -42,8 +44,8 @@ class AppFieldInput extends StatelessWidget {
           enabledBorder: inputBorder,
           filled: true,
           contentPadding: const EdgeInsets.all(8),
-        ),
-        keyboardType: textInputType,
+        ), 
+        keyboardType: textInputType, 
         obscureText: isPass,
       ),
     );
