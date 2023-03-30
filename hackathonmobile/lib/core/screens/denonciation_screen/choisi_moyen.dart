@@ -43,7 +43,7 @@ class ChoisirMoyenPage extends StatelessWidget {
               Align(
                   alignment: Alignment.centerLeft,
                   child: AppText(
-                    "Remplissez le formulaire si c’est possible, cela \n nous facilitera la tâche",
+                    "Remplissez le formulaire si c'est possible, cela \n nous facilitera la tâche",
                     color: AppColor.blackColor,
                     size: 13.0,
                     weight: FontWeight.w700,

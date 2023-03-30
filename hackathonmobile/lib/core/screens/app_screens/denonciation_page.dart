@@ -3,6 +3,7 @@ import 'package:hackathonmobile/core/constants/assert.dart';
 import 'package:hackathonmobile/core/utils/app_input.dart';
 import 'package:hackathonmobile/core/utils/app_utils_function.dart';
 import 'package:hackathonmobile/core/utils/dynamique_button.dart';
+import 'package:hackathonmobile/core/utils/helper_preferences.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/string.dart';
@@ -19,14 +20,34 @@ class DenonciationPage extends StatefulWidget {
 }
 
 class _DenonciationPageState extends State<DenonciationPage> {
-  RegExp phoneRegex = RegExp(r'^(\+[0-9]{1,3}\s*)?[0-9]{8,}$');
+  RegExp phoneRegex = RegExp(r'^(\+[0-9]{1,3}\s*)?[0-9]{8}$');
 
   TextEditingController numController = TextEditingController();
+  bool numberAvailable = false;
+  String number = '';
+
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    checkNumber();
+    super.initState();
+  }
+
   @override
   void dispose() {
     numController.dispose();
     super.dispose();
+  }
+
+  checkNumber() async {
+    bool dispo = await HelperPreferences.checkKey('NUMBER');
+    if (dispo) {
+      number = await HelperPreferences.retrieveStringValue('NUMBER');
+      numberAvailable = true;
+      logd(number);
+      setState(() {});
+    }
   }
 
   @override
@@ -37,7 +58,11 @@ class _DenonciationPageState extends State<DenonciationPage> {
       appBar: MyAppBar(),
       floatingActionButton: FloatingActionButtonWidget(
         action: () {
-          getUserPhoneNumber(context);
+          if (numberAvailable) {
+            navigateToNextPageWithTransition(context, const ChoisirMoyenPage());
+          } else {
+            getUserPhoneNumber(context);
+          }
         },
         icon: AssetData.mediumMicroP,
       ),
@@ -70,10 +95,12 @@ class _DenonciationPageState extends State<DenonciationPage> {
                 //Faire une denonciation
                 GestureDetector(
                   onDoubleTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ChoisirMoyenPage()));
+                    if (numberAvailable) {
+                      navigateToNextPageWithTransition(
+                          context, const ChoisirMoyenPage());
+                    } else {
+                      getUserPhoneNumber(context);
+                    }
                   },
                   child: Container(
                     padding: const EdgeInsets.all(10.0),
@@ -107,11 +134,12 @@ class _DenonciationPageState extends State<DenonciationPage> {
                           ]),
                       child: InkWell(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ChoisirMoyenPage()));
+                            if (numberAvailable) {
+                              navigateToNextPageWithTransition(
+                                  context, const ChoisirMoyenPage());
+                            } else {
+                              getUserPhoneNumber(context);
+                            }
                           },
                           child: Image.asset(AssetData.microP)),
                     ),
@@ -166,7 +194,7 @@ class _DenonciationPageState extends State<DenonciationPage> {
                       if (p0 != '' && phoneRegex.hasMatch(p0 ?? '')) {
                         return null;
                       } else {
-                        return 'Numero sur ce format:+229 60000009 ou 60000009';
+                        return 'Format +229 60000009 ou 60000009';
                       }
                     },
                   ),
@@ -182,10 +210,13 @@ class _DenonciationPageState extends State<DenonciationPage> {
                   ),
                   width: 100,
                   height: 45,
-                  action: () {
-                    logd("weshhhhhhh");
+                  action: () async {
                     if (_formKey.currentState!.validate()) {
-                      logd("Okayyyyyyyyy");
+                      number = numController.text;
+                      await HelperPreferences.saveStringValue(
+                          'NUMBER', numController.text);
+
+                      Navigator.pop(context);
                     } else {
                       logd("Nooooooooo");
                     }
