@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hackathonmobile/core/constants/assert.dart';
 import 'package:hackathonmobile/core/constants/colors.dart';
 import 'package:hackathonmobile/core/utils/app_text.dart';
+import 'package:hackathonmobile/core/utils/app_utils_function.dart';
+import 'package:hackathonmobile/core/utils/helper_preferences.dart';
 import 'package:hackathonmobile/core/widgets/app_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../../utils/bottom_navigator.dart';
 import '../../widgets/floating_bouton.dart';
 import 'appel.dart';
 import 'formulaire_denonciation.dart';
@@ -19,10 +21,10 @@ class ChoisirMoyenPage extends StatelessWidget {
     double height = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: MyAppBar(),
-      floatingActionButton:FloatingActionButtonWidget(action:(){
-          
-        }, 
-        icon:AssetData.messageQuestionP,),
+      floatingActionButton: FloatingActionButtonWidget(
+        action: () {},
+        icon: AssetData.messageQuestionP,
+      ),
 
       //bottomNavigationBar: const BottomNavigationWidget(currentPage: 0,),
       body: SingleChildScrollView(
@@ -65,12 +67,25 @@ class ChoisirMoyenPage extends StatelessWidget {
               ),
 
               //Appel
-              optionsCase(action: () {
+              optionsCase(
+                action: () async {
                
                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const AppelVocalScreen ()));
 
-              }, text: "Appel", 
-              urlImage: AssetData.phonBigP,), 
+                  String phoneNumber =
+                      await HelperPreferences.retrieveStringValue('NUMBER');
+                  final Uri url = Uri.parse('tel:$phoneNumber');
+
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url);
+                  } else {
+                    toast(
+                        'Impossible de lancer l\'appel pour ce numéro $phoneNumber');
+                  }
+                },
+                text: "Appel",
+                urlImage: AssetData.phonBigP,
+              ),
               SizedBox(
                 height: height * .05,
               ),
@@ -87,9 +102,11 @@ class ChoisirMoyenPage extends StatelessWidget {
               ),
 
               //Contact  whatsapp
-              optionsCase(action: () {
-              }, text: "Contact whatsapp", 
-              urlImage: AssetData.whatsappP,)
+              optionsCase(
+                action: () {},
+                text: "Contact whatsapp",
+                urlImage: AssetData.whatsappP,
+              )
             ],
           ),
         ),
