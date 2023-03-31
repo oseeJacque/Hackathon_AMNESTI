@@ -120,31 +120,40 @@ class _FormulaireDenonciationScreenState extends State<FormulaireDenonciationScr
           padding: const EdgeInsets.only(left: 10.0),
           child: Column(
             children: [
-              RadioListTile(
-          contentPadding: const EdgeInsets.all(10.0),
-                    activeColor: AppColor.blueBgColor,
-                    selectedTileColor: AppColor.blueBgColor,
-                    title: AppText("Victime",color: AppColor.blackColor,size: 20.0,weight: FontWeight.w500,),
-                    value: "Victime", 
-                    groupValue: typeDenonciateur, 
-                    onChanged: (value){
-                      setState(() {
-                          typeDenonciateur = value.toString();
-                      });
-                      print(typeDenonciateur);
-                    },
-                ), 
-      RadioListTile(
-                    activeColor: AppColor.blueBgColor,
-                    title: AppText("Dénonciateur",color: AppColor.blackColor,size: 20.0,weight: FontWeight.w500),
-                    value: "Dénonciateur", 
-                    groupValue: typeDenonciateur, 
-                    onChanged: (value){
-                      setState(() {
-                          typeDenonciateur = value.toString();
-                      });
-                      print(typeDenonciateur);
-                    },
+              
+              Theme(
+                 data: Theme.of(context).copyWith(
+                  unselectedWidgetColor: Colors.grey,),
+                child: RadioListTile(
+                        contentPadding: const EdgeInsets.all(10.0),
+                      activeColor: AppColor.blueBgColor,
+                      selectedTileColor: AppColor.blueBgColor,
+                      title: AppText("Victime",color: AppColor.blackColor,size: 20.0,weight: FontWeight.w500,),
+                      value: "Victime", 
+                      groupValue: typeDenonciateur, 
+                      onChanged: (value){
+                        setState(() {
+                            typeDenonciateur = value.toString();
+                        });
+                        print(typeDenonciateur);
+                      },
+                  ),
+              ), 
+                Theme(
+                 data: Theme.of(context).copyWith(
+                  unselectedWidgetColor: Colors.grey,),
+                  child: RadioListTile(
+                      activeColor: AppColor.blueBgColor,
+                      title: AppText("Dénonciateur",color: AppColor.blackColor,size: 20.0,weight: FontWeight.w500),
+                      value: "Dénonciateur", 
+                      groupValue: typeDenonciateur, 
+                      onChanged: (value){
+                        setState(() {
+                            typeDenonciateur = value.toString();
+                        });
+                        print(typeDenonciateur);
+                      },
+                  ),
                 ),
             ],
           ),
