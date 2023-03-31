@@ -132,7 +132,7 @@ class ChoisirMoyenPage extends StatelessWidget {
                   }
                 },
                 text: "Contact whatsapp",
-                urlImage: AssetData.whatsapp,
+                urlImage: AssetData.whatsappP,
               )
             ],
           ),
