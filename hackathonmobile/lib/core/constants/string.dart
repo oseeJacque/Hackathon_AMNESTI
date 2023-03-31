@@ -5,7 +5,7 @@ class StringData{
 
 
    static String formatDateTime1="yyyy-MM-dd hh:mm";
-  static  String denonce="DENONCE";
+  static  String denonce="DOXAMI";
   static  String denoncerInjustice="Dénoncer, dénoncer l'injustice";
   static  String commencer="Commencer";
   static  String faireValoirVosdroits="Faites valoir vos droits";

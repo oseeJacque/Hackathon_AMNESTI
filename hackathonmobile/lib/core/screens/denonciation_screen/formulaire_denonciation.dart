@@ -1,13 +1,18 @@
 
 
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:hackathonmobile/core/utils/dynamique_button.dart';
 import 'package:hackathonmobile/core/widgets/app_bar.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../constants/assert.dart';
 import '../../constants/colors.dart';
 import '../../utils/app_input.dart';
 import '../../utils/app_text.dart';
+import '../../utils/app_utils_function.dart';
 import '../../widgets/floating_bouton.dart';
 
 class FormulaireDenonciationScreen extends StatefulWidget {
@@ -22,7 +27,8 @@ class _FormulaireDenonciationScreenState extends State<FormulaireDenonciationScr
   TextEditingController _prenomsController=TextEditingController();
   TextEditingController _titleController=TextEditingController();
   TextEditingController _descriptionController=TextEditingController();
-
+  TextEditingController _numEditingController=TextEditingController();
+  Uint8List? _file;
   String? typeDenonciateur;
   int page_instance=0;
 
@@ -58,7 +64,7 @@ class _FormulaireDenonciationScreenState extends State<FormulaireDenonciationScr
                 (page_instance==2)?
                 form3(): 
                 (page_instance==3)?
-                form4(): 
+                form4(context): 
                 form5(),
               ), 
               SizedBox(height: height*.1,), 
@@ -69,9 +75,9 @@ class _FormulaireDenonciationScreenState extends State<FormulaireDenonciationScr
                 children: [
                   //Précédent
                   DynamiqueButton(
-                    hasShadow: true,
+                    hasShadow: true, 
                     childs: AppText("Précedant",color: AppColor.blueBgColor,), 
-                    width: width*.4, 
+                    width: width*.4,
                     height: height*.1, 
                     action: (){
                       if(page_instance !=0){
@@ -165,7 +171,7 @@ class _FormulaireDenonciationScreenState extends State<FormulaireDenonciationScr
   Widget form2(){
     return Column(
       children: [
-        typeDenonciateur=="Victime"? Align(
+        !(typeDenonciateur=="Victime")? Align(
           alignment: Alignment.centerRight,
           child:AppText( 
             "Optionnelle",color: AppColor.blackColor,
@@ -235,7 +241,7 @@ class _FormulaireDenonciationScreenState extends State<FormulaireDenonciationScr
     );
   }
 
-  Widget form4(){
+  Widget form4(context){
     return Column(
       children: [
         Align(
@@ -248,25 +254,37 @@ class _FormulaireDenonciationScreenState extends State<FormulaireDenonciationScr
             "Ajouter d'image ou de vidéo",color: AppColor.blackColor,weight: FontWeight.w400,size: 22,),
 
       const SizedBox(height: 30.0,),
-      Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: AppColor.blueBgColor,
-                width: 1,
+      GestureDetector(
+        onTap: (){
+          _selectImage(context);
+        },
+        child: Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: AppColor.blueBgColor,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(10),
               ),
-              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                AssetData.cameraP,
+                color: AppColor.blueBgColor,
+              ),
+      
             ),
-            child: Image.asset(
-              AssetData.cameraP,
-              color: AppColor.blueBgColor,
-            ),
-
-          ),
+      ),
           const SizedBox(height: 20.0,),
           Container(
-            child: Image.asset(AssetData.personP),
+            width: 80,
+              height: 80,
+            child:_file == null? Image.asset(AssetData.personP):Container(
+              child: Image.memory(
+              _file!,
+            fit: BoxFit.cover,
+      ),
+            )
           )
          
       ],
@@ -286,20 +304,59 @@ class _FormulaireDenonciationScreenState extends State<FormulaireDenonciationScr
         const SizedBox(height: 20,),
 
         AppFieldInput(
-          textEditingController: _titleController, 
+          textEditingController: _descriptionController, 
         hintText: "Description des faits", 
         textInputType: TextInputType.multiline),
 
         const SizedBox(height: 20,),
 
         AppFieldInput(
-          textEditingController: _titleController, 
+          textEditingController: _nameController, 
         hintText: "Entrer un contact joignable", 
         textInputType: TextInputType.multiline),  
 
 
 
       ],
+    );
+  }
+   _selectImage(BuildContext parentContext) async {
+    return showDialog(
+      context: parentContext,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: const Text('Create a Post'),
+          children: <Widget>[
+            SimpleDialogOption(
+                padding: const EdgeInsets.all(20),
+                child: const Text('Take a photo'),
+                onPressed: () async {
+                  Navigator.pop(context);
+                  Uint8List file = await UtilFunctions.pickImage(ImageSource.camera);
+                  setState(() {
+                    _file = file;
+                  });
+                }),
+            SimpleDialogOption(
+                padding: const EdgeInsets.all(20),
+                child: const Text('Choose from Gallery'),
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                  Uint8List file = await UtilFunctions.pickImage(ImageSource.gallery);
+                  setState(() {
+                    _file = file;
+                  });
+                }),
+            SimpleDialogOption(
+              padding: const EdgeInsets.all(20),
+              child: const Text("Cancel"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )
+          ],
+        );
+      },
     );
   }
 }

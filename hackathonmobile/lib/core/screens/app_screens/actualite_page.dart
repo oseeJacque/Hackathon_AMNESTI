@@ -120,14 +120,14 @@ class _ActualitePageState extends State<ActualitePage> {
               ),
 
               ListView.builder(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
-                  physics: BouncingScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: actualist.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: EdgeInsets.symmetric(vertical: 15.0),
+                      margin: const EdgeInsets.symmetric(vertical: 15.0),
                       width: double.infinity,
                       //height: height * .65,
                       decoration: BoxDecoration(
@@ -156,7 +156,7 @@ class _ActualitePageState extends State<ActualitePage> {
                                   borderRadius: BorderRadius.circular(15.0),
                                   color: AppColor.greyColor),
                               width: double.infinity,
-                              height: height * .3,
+                              height: height * .4,
                               child: Image.network(actualist[index]["image"],
                                   fit: BoxFit.fill, loadingBuilder:
                                       (BuildContext context, Widget child,

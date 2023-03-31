@@ -10,7 +10,7 @@ import 'app_text.dart';
 
 class UtilFunctions {
 //Pick image
-  Future pickImage(ImageSource source) async {
+  static Future pickImage(ImageSource source) async {
     final image = await ImagePicker().pickImage(source: source);
     if (image != null) {
       return await image.readAsBytes();

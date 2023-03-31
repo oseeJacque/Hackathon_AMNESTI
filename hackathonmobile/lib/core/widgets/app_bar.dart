@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:hackathonmobile/core/screens/app_screens/historique_page.dart';
 import 'package:hackathonmobile/core/screens/app_screens/home_page.dart';
 
 import '../constants/assert.dart';
@@ -33,7 +34,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
                 position: badges.BadgePosition.topEnd(top: -10, end: -12),
                 showBadge: true,
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const NotificationWidget()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const HistoriquePage()));
                 },
                 badgeStyle: badges.BadgeStyle(
                   shape: badges.BadgeShape.square,
