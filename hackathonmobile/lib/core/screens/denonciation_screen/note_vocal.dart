@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -186,7 +185,9 @@ class _NoteVocalPageState extends ConsumerState<NoteVocalPage> {
             //Dénoncer button
             DynamiqueButton(
                 childs: isLoading
-                    ? const CupertinoActivityIndicator()
+                    ? const CircularProgressIndicator(
+                        strokeWidth: 2,
+                      )
                     : const AppText(
                         "Dénoncer",
                         size: 20.0,

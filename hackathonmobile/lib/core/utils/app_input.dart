@@ -6,6 +6,8 @@ class AppFieldInput extends StatelessWidget {
   final bool isPass;
   final String hintText;
   final TextInputType textInputType;
+  int minLine = 1;
+  int maxLine = 1;
   String? Function(String?)? validator;
 
   AppFieldInput(
@@ -14,7 +16,9 @@ class AppFieldInput extends StatelessWidget {
       this.isPass = false,
       required this.hintText,
       required this.textInputType,
-      this.validator})
+      this.validator,
+      this.minLine = 1,
+      this.maxLine = 1})
       : super(key: key);
 
   @override
@@ -49,6 +53,8 @@ class AppFieldInput extends StatelessWidget {
         keyboardType: textInputType,
         obscureText: isPass,
         validator: validator,
+        minLines: minLine,
+        maxLines: maxLine,
       ),
     );
   }
