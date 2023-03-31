@@ -6,17 +6,6 @@ class AppFieldInput extends StatelessWidget {
   final bool isPass;
   final String hintText;
   final TextInputType textInputType;
-<<<<<<< HEAD
-  final bool multiLine;
-  const AppFieldInput({
-    Key? key,
-    required this.textEditingController,
-    this.isPass = false,
-    required this.hintText,
-    required this.textInputType, 
-    this.multiLine=false,
-  }) : super(key: key);
-=======
   String? Function(String?)? validator;
 
   AppFieldInput(
@@ -27,7 +16,6 @@ class AppFieldInput extends StatelessWidget {
       required this.textInputType,
       this.validator})
       : super(key: key);
->>>>>>> fad211c86e510bc079e5b7236a62e9fd57c83c9f
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +44,9 @@ class AppFieldInput extends StatelessWidget {
           enabledBorder: inputBorder,
           filled: true,
           contentPadding: const EdgeInsets.all(8),
-<<<<<<< HEAD
-        ), 
-        keyboardType: textInputType, 
-=======
         ),
         style: TextStyle(color: AppColor.blackColor),
         keyboardType: textInputType,
->>>>>>> fad211c86e510bc079e5b7236a62e9fd57c83c9f
         obscureText: isPass,
         validator: validator,
       ),

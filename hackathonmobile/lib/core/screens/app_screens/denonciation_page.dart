@@ -58,11 +58,12 @@ class _DenonciationPageState extends State<DenonciationPage> {
       appBar: MyAppBar(),
       floatingActionButton: FloatingActionButtonWidget(
         action: () {
-          if (numberAvailable) {
+          Navigator.push(context, MaterialPageRoute(builder: ((context) => ChoisirMoyenPage())));
+         /* if (numberAvailable) {
             navigateToNextPageWithTransition(context, const ChoisirMoyenPage());
           } else {
             getUserPhoneNumber(context);
-          }
+          }*/
         },
         icon: AssetData.mediumMicroP,
       ),

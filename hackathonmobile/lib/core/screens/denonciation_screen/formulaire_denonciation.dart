@@ -273,7 +273,6 @@ class _FormulaireDenonciationScreenState extends State<FormulaireDenonciationScr
         const SizedBox(height: 20,),
 
         AppFieldInput(
-          multiLine: true,
           textEditingController: _titleController, 
         hintText: "Description des faits", 
         textInputType: TextInputType.multiline),
@@ -281,7 +280,6 @@ class _FormulaireDenonciationScreenState extends State<FormulaireDenonciationScr
         const SizedBox(height: 20,),
 
         AppFieldInput(
-          multiLine: true,
           textEditingController: _titleController, 
         hintText: "Entrer un contact joignable", 
         textInputType: TextInputType.multiline),  
