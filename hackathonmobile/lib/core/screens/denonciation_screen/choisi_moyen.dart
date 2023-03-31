@@ -147,7 +147,8 @@ class ChoisirMoyenPage extends StatelessWidget {
   Widget optionsCase(
       {required String urlImage,
       required String text,
-      required VoidCallback action}) {
+      required VoidCallback action,
+      }) {
     return Column(
       children: [
         InkWell(

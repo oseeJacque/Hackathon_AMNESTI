@@ -9,9 +9,8 @@ class DioClient {
   LoggingInterceptor? loggingInterceptor = LoggingInterceptor();
 
   Dio dio = Dio();
-  String? token = "";
 
-  DioClient(this.baseUrl, this.token) {
+  DioClient(this.baseUrl) {
     //token = sharedPreferences.getString(AppConstants.TOKEN);
     //print(token);
     dio
