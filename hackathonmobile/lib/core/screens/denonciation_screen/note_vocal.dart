@@ -201,6 +201,7 @@ class _NoteVocalPageState extends ConsumerState<NoteVocalPage> {
 
                   int len = await File(filePath).length();
                   if (len != 0) {
+                    
                     setState(() {
                       isLoading = true;
                     });
