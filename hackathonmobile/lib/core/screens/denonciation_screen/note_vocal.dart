@@ -13,6 +13,7 @@ import 'package:hackathonmobile/core/constants/assert.dart';
 import 'package:hackathonmobile/core/utils/app_text.dart';
 import 'package:hackathonmobile/core/utils/app_utils_function.dart';
 import 'package:hackathonmobile/core/utils/dynamique_button.dart';
+import 'package:hackathonmobile/core/utils/helper_preferences.dart';
 import 'package:hackathonmobile/core/utils/providers.dart';
 import 'package:hackathonmobile/core/widgets/app_bar.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -227,27 +228,36 @@ class _NoteVocalPageState extends ConsumerState<NoteVocalPage> {
                       logd('Not authorized');
                     }
                   });
+                  String phone =
+                      await HelperPreferences.retrieveStringValue('NUMBER');
+                      
+                  //Create denonciator
+                  await ref.read(dio).post(urlDeAc,
+                      data: {'phone': phone, 'address': address}).then((value) {
+                    logd('----------------');
+                    logd(value);
+                  });
 
-                  //POst File
-                  // int len = await File(filePath).length();
-                  // if (len != 0) {
-                  //   setState(() {
-                  //     isLoading = true;
-                  //   });
+                  //Post File
+                  int len = await File(filePath).length();
+                  if (len != 0) {
+                    setState(() {
+                      isLoading = true;
+                    });
 
-                  //   FormData formData = FormData.fromMap({
-                  //     'audio': await MultipartFile.fromFile(filePath,
-                  //         filename: 'song.wav'),
-                  //     'address': 'Cotonou',
-                  //   });
-                  //   await ref
-                  //       .read(dio)
-                  //       .postFile(body: formData, url: urlDeno)
-                  //       .then((value) => toast('Soumission avec succès !'));
-                  // } else {
-                  //   toast(
-                  //       "Veuillez enregistrer un audio avant de passer à la traduction !");
-                  // }
+                    FormData formData = FormData.fromMap({
+                      'audio': await MultipartFile.fromFile(filePath,
+                          filename: 'song.wav'),
+                      'address': 'Cotonou',
+                    });
+                    await ref
+                        .read(dio)
+                        .postFile(body: formData, url: urlDeno)
+                        .then((value) => toast('Soumission avec succès !'));
+                  } else {
+                    toast(
+                        "Veuillez enregistrer un audio avant de passer à la traduction !");
+                  }
                 },
                 bgColor: AppColor.blueBgColor,
                 radius: 10.0)
