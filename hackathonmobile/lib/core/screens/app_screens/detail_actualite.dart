@@ -1,10 +1,9 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:hackathonmobile/core/utils/dynamique_button.dart';
 import 'package:hackathonmobile/core/widgets/app_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/colors.dart';
 import '../../utils/app_text.dart';
@@ -23,7 +22,7 @@ class ActuailiteDetail extends StatelessWidget {
         child: Container(
                     margin: const EdgeInsets.symmetric(vertical: 15.0,horizontal: 20.0),
                   width: double.infinity,
-                  height: height*2,
+                  //height: height*2.5s,
                   decoration:  BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     color: AppColor.backgroundColor,
@@ -45,10 +44,29 @@ class ActuailiteDetail extends StatelessWidget {
                           ),
                           width: double.infinity,
                           height: height*.6,
-                          child: Image.asset(data["image"]!,fit:BoxFit.fill,),
+                          child: Image.network(data["image"]!,
+                                  fit: BoxFit.fill, loadingBuilder:
+                                      (BuildContext context, Widget child,
+                                          ImageChunkEvent? loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child;
+                                }
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    color: AppColor.blueBgColor,
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                .cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!
+                                        : null,
+                                  ),
+                                );
+                              }),
                         ), 
                       const SizedBox(height: 10.0,),
                       Container(
+                        margin: const EdgeInsets.only(bottom: 20.0),
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Column(
                           children: [
@@ -58,7 +76,7 @@ class ActuailiteDetail extends StatelessWidget {
                               const SizedBox(height: 25.0,), 
                               Align(
                                 alignment: Alignment.centerLeft,
-                                child: AppText(data["title"]!,color: AppColor.blackColor,weight: FontWeight.w700,size:20 ,)),
+                                child: Text(data["title"]!,style: TextStyle(color: AppColor.blackColor,fontWeight: FontWeight.w700,fontSize: 20.0))),
                                 const SizedBox(height: 20.0,),
                               Text(data["description"]!,style: TextStyle(color: AppColor.blackColor,fontSize: 18.0),), 
 
@@ -70,7 +88,9 @@ class ActuailiteDetail extends StatelessWidget {
                                 childs: AppText("Lire la suite",color: AppColor.backgroundColor,weight: FontWeight.w700,), 
                                 width: width*.3, 
                                 height: height*.1, 
-                                action: (){}, 
+                                action: (){
+                                  _launchUrl(data["link"]!);
+                                }, 
                                 bgColor: AppColor.blueBgColor, 
                                 radius: 10.0),
                             )
@@ -85,4 +105,8 @@ class ActuailiteDetail extends StatelessWidget {
       ),
     );
   }
+  Future<void> _launchUrl(url) async {
+  if (!await launchUrl(url)) {
+    throw Exception('Could not launch $url');
+  }}
 }

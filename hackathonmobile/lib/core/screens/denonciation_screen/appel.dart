@@ -8,6 +8,7 @@ import 'package:hackathonmobile/core/widgets/app_bar.dart';
 
 import '../../constants/colors.dart';
 import '../../widgets/floating_bouton.dart';
+import '../app_screens/chat.dart';
 
 class AppelVocalScreen extends StatefulWidget {
   const AppelVocalScreen({super.key});
@@ -35,13 +36,13 @@ class _AppelVocalScreenState extends State<AppelVocalScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: MyAppBar(),
-     floatingActionButton:FloatingActionButtonWidget(action:(){         
+      appBar: MyAppBar(back: true,),
+     floatingActionButton:FloatingActionButtonWidget(
+       rotate: true,
+        action:(){
+          Navigator.push(context, MaterialPageRoute(builder: ((context) => const ChatScreenPage())));
         }, 
         icon:AssetData.messageQuestionP,),
-
-      //bottomNavigationBar: const BottomNavigationWidget(currentPage: 0,),
-      
         body: Container(
           alignment: Alignment.center,
           margin: EdgeInsets.symmetric(vertical: height*.05,horizontal: width*.03),

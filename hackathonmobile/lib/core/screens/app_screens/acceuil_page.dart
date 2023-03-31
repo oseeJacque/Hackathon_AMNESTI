@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackathonmobile/core/screens/app_screens/chat.dart';
 import 'package:hackathonmobile/core/utils/dynamique_button.dart';
 
 import '../../constants/assert.dart';
@@ -16,16 +17,23 @@ class AcceuilPage extends StatefulWidget {
 }
 
 class _AcceuilPageState extends State<AcceuilPage> {
+  List numerosVerts = ["160", "166", "113"];
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: MyAppBar(),
-      floatingActionButton:FloatingActionButtonWidget(
-        action:(){
-        }, 
-        icon:AssetData.messageQuestionP,),
+      floatingActionButton: FloatingActionButtonWidget(
+         rotate: true,
+        action: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) => const ChatScreenPage())));
+        },
+        icon: AssetData.messageQuestionP,
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.symmetric(
@@ -106,14 +114,22 @@ class _AcceuilPageState extends State<AcceuilPage> {
                       ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      Image.asset(AssetData.infocircleP),
-                      AppText(
-                        StringData.infos,
-                        color: AppColor.blackColor,
-                      )
-                    ],
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ChatScreenPage()));
+                    },
+                    child: Row(
+                      children: [
+                        Image.asset(AssetData.infocircleP),
+                        AppText(
+                          StringData.infos,
+                          color: AppColor.blackColor,
+                        )
+                      ],
+                    ),
                   )
                 ]),
               ),
@@ -181,10 +197,34 @@ class _AcceuilPageState extends State<AcceuilPage> {
                     action: () {},
                     bgColor: AppColor.blueBgColor,
                     radius: 10.0),
-              ), 
-            SizedBox(
-                height: height * .1,
               ),
+              SizedBox(
+                height: height * .05,
+              ),
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                ),
+                itemCount: numerosVerts.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return assistant(action: (){}, 
+                  num: numerosVerts[index]);
+                },
+              )
+
+              /*ListView.builder(s
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
+              itemCount: numerosVerts.length,
+              itemBuilder: (context,index){
+                return assistant(action: () {
+                  // Implementation de la fonction
+                }, 
+                num: numerosVerts[index],);
+              })*/
             ],
           ),
         ),
@@ -209,6 +249,56 @@ class _AcceuilPageState extends State<AcceuilPage> {
       child: AppText(
         text,
         color: AppColor.blackColor,
+      ),
+    );
+  }
+
+  Widget assistant({required VoidCallback action, required String num}) {
+    return GestureDetector(
+      onTap: action,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+        width: 80,
+        height: 80,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          color: AppColor.backgroundColor,
+          boxShadow: [
+            BoxShadow(
+                color: AppColor.blueBgColor,
+                spreadRadius: 1.0,
+                blurRadius: 2.0,
+                offset: const Offset(0, 0))
+          ],
+        ),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Image.asset(
+                AssetData.infocircleP,
+                color: AppColor.blueBgColor,
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  AssetData.phoneSmallP,
+                  width: 30,
+                  height: 30,
+                ),
+                AppText(
+                  num,
+                  color: AppColor.blackColor,
+                  size: 20.0,
+                  weight: FontWeight.bold,
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -34,8 +34,12 @@ class _NoteVocalPageState extends State<NoteVocalPage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: MyAppBar(),
-     floatingActionButton:FloatingActionButtonWidget(action:(){         
+      appBar: MyAppBar(
+        back: true
+      ),
+     floatingActionButton:FloatingActionButtonWidget(
+       rotate: true,
+      action:(){         
         }, 
         icon:AssetData.messageQuestionP,),
 

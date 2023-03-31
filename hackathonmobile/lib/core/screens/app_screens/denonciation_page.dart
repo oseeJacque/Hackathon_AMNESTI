@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackathonmobile/core/constants/assert.dart';
+import 'package:hackathonmobile/core/screens/denonciation_screen/note_vocal.dart';
 import 'package:hackathonmobile/core/utils/app_input.dart';
 import 'package:hackathonmobile/core/utils/app_utils_function.dart';
 import 'package:hackathonmobile/core/utils/dynamique_button.dart';
@@ -57,15 +58,15 @@ class _DenonciationPageState extends State<DenonciationPage> {
     return Scaffold(
       appBar: MyAppBar(),
       floatingActionButton: FloatingActionButtonWidget(
+        rotate: true,
         action: () {
-          Navigator.push(context, MaterialPageRoute(builder: ((context) => ChoisirMoyenPage())));
-         /* if (numberAvailable) {
-            navigateToNextPageWithTransition(context, const ChoisirMoyenPage());
+          if (numberAvailable) {
+            navigateToNextPageWithTransition(context, const NoteVocalPage());
           } else {
             getUserPhoneNumber(context);
-          }*/
+          }
         },
-        icon: AssetData.mediumMicroP,
+        icon: AssetData.microphone2P,
       ),
       body: SingleChildScrollView(
         child: Container(

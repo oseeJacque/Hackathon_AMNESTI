@@ -7,7 +7,8 @@ import '../constants/colors.dart';
 class FloatingActionButtonWidget extends StatelessWidget {
   final String icon;
   final  action;
-  const FloatingActionButtonWidget({super.key, required this.icon, required this.action});
+  final bool rotate;
+  const FloatingActionButtonWidget({super.key, required this.icon, required this.action, this.rotate=false});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class FloatingActionButtonWidget extends StatelessWidget {
           )]
         ),
         child: Transform.rotate(
-          angle: -pi/4,
+          angle: rotate?0:-pi/4,
           child: Image.asset(icon,color: AppColor.blueBgColor)),
       ));
   }

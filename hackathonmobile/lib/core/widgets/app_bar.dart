@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:hackathonmobile/core/screens/app_screens/home_page.dart';
 
 import '../constants/assert.dart';
 import '../constants/colors.dart';
@@ -7,9 +8,9 @@ import '../screens/app_screens/notification.dart';
 import '../utils/app_text.dart';
 
 class MyAppBar extends StatelessWidget with PreferredSizeWidget {
-  
+  final bool back;
   MyAppBar(
-      {super.key,
+      {super.key,  this.back=false,
       });
 
   @override
@@ -18,9 +19,11 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
     double height = MediaQuery.of(context).size.height;
     return  AppBar(
         leading:
-            Container(
-              margin: const EdgeInsets.only(left: 15.0),
-              child: IconButton(onPressed: () {}, icon: Image.asset(AssetData.logoP,fit: BoxFit.cover,))),
+            back?IconButton(onPressed: (){
+              Navigator.pop(context);
+            }, icon: Icon(Icons.arrow_back,color: AppColor.blueBgColor,size: 40.0,)):IconButton(onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage()));
+            }, icon: Image.asset(AssetData.logoP,fit: BoxFit.cover,)),
         elevation: 0.0,
         backgroundColor: AppColor.backgroundColor,
         actions: [
