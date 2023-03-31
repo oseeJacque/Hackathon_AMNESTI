@@ -51,8 +51,6 @@ dependencies:
   badges: ^3.0.3
   google_nav_bar: ^5.0.6
   flutter_riverpod: ^2.3.2
-  
-
   url_launcher: ^6.1.10
   
 
