@@ -188,8 +188,9 @@ class _NoteVocalPageState extends ConsumerState<NoteVocalPage> {
             //Dénoncer button
             DynamiqueButton(
                 childs: isLoading
-                    ? const CircularProgressIndicator(
+                    ? CircularProgressIndicator(
                         strokeWidth: 2,
+                        color: AppColor.whiteColor,
                       )
                     : const AppText(
                         "Dénoncer",

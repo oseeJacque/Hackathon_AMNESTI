@@ -165,8 +165,9 @@ class _FormulaireDenonciationScreenState
                               color: AppColor.backgroundColor,
                             )
                           : isLoading
-                              ? const CircularProgressIndicator(
+                              ? CircularProgressIndicator(
                                   strokeWidth: 2,
+                                  color: AppColor.whiteColor,
                                 )
                               : AppText(
                                   "Soumettre",

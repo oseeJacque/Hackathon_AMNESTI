@@ -20,15 +20,12 @@ class ChoisirMoyenPage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: MyAppBar(
-        back: true
+      appBar: MyAppBar(back: true),
+      floatingActionButton: FloatingActionButtonWidget(
+        rotate: true,
+        action: () {},
+        icon: AssetData.messageQuestionP,
       ),
-      floatingActionButton:FloatingActionButtonWidget(
-         rotate: true,
-        action:(){
-          
-        }, 
-        icon:AssetData.messageQuestionP,),
 
       //bottomNavigationBar: const BottomNavigationWidget(currentPage: 0,),
       body: SingleChildScrollView(
@@ -135,7 +132,7 @@ class ChoisirMoyenPage extends StatelessWidget {
                   }
                 },
                 text: "Contact whatsapp",
-                urlImage: AssetData.whatsappP,
+                urlImage: AssetData.whatsapp,
               )
             ],
           ),
@@ -144,11 +141,11 @@ class ChoisirMoyenPage extends StatelessWidget {
     );
   }
 
-  Widget optionsCase(
-      {required String urlImage,
-      required String text,
-      required VoidCallback action,
-      }) {
+  Widget optionsCase({
+    required String urlImage,
+    required String text,
+    required VoidCallback action,
+  }) {
     return Column(
       children: [
         InkWell(
