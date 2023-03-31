@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:hackathonmobile/core/constants/assert.dart';
 import 'package:hackathonmobile/core/utils/app_input.dart';
@@ -58,12 +60,11 @@ class _DenonciationPageState extends State<DenonciationPage> {
       appBar: MyAppBar(),
       floatingActionButton: FloatingActionButtonWidget(
         action: () {
-          Navigator.push(context, MaterialPageRoute(builder: ((context) => ChoisirMoyenPage())));
-         /* if (numberAvailable) {
+          if (numberAvailable) {
             navigateToNextPageWithTransition(context, const ChoisirMoyenPage());
           } else {
             getUserPhoneNumber(context);
-          }*/
+          }
         },
         icon: AssetData.mediumMicroP,
       ),
@@ -218,6 +219,9 @@ class _DenonciationPageState extends State<DenonciationPage> {
                           'NUMBER', numController.text);
 
                       Navigator.pop(context);
+
+                      navigateToNextPageWithTransition(
+                          context, const ChoisirMoyenPage());
                     } else {
                       logd("Nooooooooo");
                     }
