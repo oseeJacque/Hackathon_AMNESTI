@@ -23,7 +23,7 @@ class WelcommePage extends StatelessWidget {
             //Flexible(child: Container(),flex: 1,),
 
             SizedBox(
-              height: 50,
+              height: 30,
               width: 50,
               child: Image.asset(
                 AssetData.logoP,
