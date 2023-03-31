@@ -17,30 +17,30 @@ class ActualitePage extends StatefulWidget {
 }
 
 class _ActualitePageState extends State<ActualitePage> {
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   List actualist = [
     {
       "title":
           "Sub-Saharan Africa: Millions denied vaccines, deepening inequality and human suffering from conflicts sum up 2021",
       "date": "March 29, 2022",
-      "description":"Amnesty International Report 2021/22: The State of the World’s Human Rights finds that these states, alongside corporate titans, have in fact driven deeper global inequality, with most African countries left struggling to recover from Covid-19 due to high levels of inequality, poverty and unemployment exacerbated by unequal distribution of vaccines.“Covid-19 should have been a decisive wake-up call to deal with inequality and poverty. Instead, we have seen deeper inequality and greater instability in Africa exacerbated by global powers, especially rich countries, who failed to ensure that big pharma distributed vaccines equally between states to ensure the same level of recovery from the Covid-19 pandemic,” said Deprose Muchena, Amnesty International’s Director for East and Southern Africa.“As things stand now, most African countries will take long to recover from Covid-19 due to high levels of inequality and poverty. The after-effects of Covid-19 have been most damaging to the most marginalized communities, including those on the front lines of endemic poverty from Angola to Zambia, Ethiopia to Somalia and the Central Africa Republic to Sierra Leone.”",
+      "description":
+          "Amnesty International Report 2021/22: The State of the World’s Human Rights finds that these states, alongside corporate titans, have in fact driven deeper global inequality, with most African countries left struggling to recover from Covid-19 due to high levels of inequality, poverty and unemployment exacerbated by unequal distribution of vaccines.“Covid-19 should have been a decisive wake-up call to deal with inequality and poverty. Instead, we have seen deeper inequality and greater instability in Africa exacerbated by global powers, especially rich countries, who failed to ensure that big pharma distributed vaccines equally between states to ensure the same level of recovery from the Covid-19 pandemic,” said Deprose Muchena, Amnesty International’s Director for East and Southern Africa.“As things stand now, most African countries will take long to recover from Covid-19 due to high levels of inequality and poverty. The after-effects of Covid-19 have been most damaging to the most marginalized communities, including those on the front lines of endemic poverty from Angola to Zambia, Ethiopia to Somalia and the Central Africa Republic to Sierra Leone.”",
       "image":
-          "https://www.amnesty.org/en/wp-content/uploads/2022/03/AIR-Web-PIC-1.png", 
-      "link":"https://www.amnesty.org/en/latest/news/2022/03/sub-saharan-africa-millions-denied-vaccines/"
+          "https://www.amnesty.org/en/wp-content/uploads/2022/03/AIR-Web-PIC-1.png",
+      "link":
+          "https://www.amnesty.org/en/latest/news/2022/03/sub-saharan-africa-millions-denied-vaccines/"
     },
-  
     {
       "title":
-          "Bénin – Togo. Le combat contre les groupes armés ne peut en rien justifier les violations des droits humains",
+          "Bénin - Togo. Le combat contre les groupes armés ne peut en rien justifier les violations des droits humains",
       "date": "Juillet 27, 2022",
       "description":
           "Les forces de sécurité commettent des violations des droits humains dans le cadre de la lutte contre les groupes armés au Bénin et au Togo, en particulier contre des membres du groupe ethnique peul. Ces violations des droits humains risquent de devenir systématiques et de s’aggraver, comme c’est le cas dans des pays voisins qui combattent les mêmes groupes armés depuis plusieurs années. Les autorités béninoises et togolaises doivent maintenant mettre un terme à cette situation. ",
       "image":
-          "https://www.amnesty.org/en/wp-content/uploads/2022/07/photo-Togo-scaled-e1658932551850-1444x710.jpg", 
-
-      "link":"https://www.amnesty.org/fr/latest/news/2022/07/benin-togo-fight-against-armed-groups-must-not-justify-human-rights-violations/"
+          "https://www.amnesty.org/en/wp-content/uploads/2022/07/photo-Togo-scaled-e1658932551850-1444x710.jpg",
+      "link":
+          "https://www.amnesty.org/fr/latest/news/2022/07/benin-togo-fight-against-armed-groups-must-not-justify-human-rights-violations/"
     },
-
     {
       "title":
           "Bénin. Des policiers accusés d’avoir violemment agressé une femme transgenre",
@@ -48,11 +48,10 @@ class _ActualitePageState extends State<ActualitePage> {
       "description":
           "Début mars, une délégation de diplomates européens s’est rendue à Huwara et Zatara, deux villes palestiniennes du gouvernorat de Naplouse, où des colons israéliens se sont livrés à de violentes attaques.Les violences à Huwara et alentour ont choqué par leur ampleur et leur intensité, des centaines de colons israéliens y prenant part.",
       "image":
-          "https://www.amnesty.org/fr/wp-content/uploads/2022/03/Benin-Activist-810x710.jpg", 
-
-      "link":"https://www.amnesty.org/fr/latest/news/2022/03/benin-police-accused-of-violently-attacking-transgender-woman/"
-    }, 
-
+          "https://www.amnesty.org/fr/wp-content/uploads/2022/03/Benin-Activist-810x710.jpg",
+      "link":
+          "https://www.amnesty.org/fr/latest/news/2022/03/benin-police-accused-of-violently-attacking-transgender-woman/"
+    },
   ];
   @override
   Widget build(BuildContext context) {
@@ -200,10 +199,11 @@ class _ActualitePageState extends State<ActualitePage> {
                                     alignment: Alignment.centerLeft,
                                     child: Text(
                                       actualist[index]["title"],
-                                      style: TextStyle(color: AppColor.blackColor,fontWeight: FontWeight.w700,fontSize: 20.0),
-                                      
+                                      style: TextStyle(
+                                          color: AppColor.blackColor,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 20.0),
                                     )),
-                                    
                               ],
                             ),
                           )
