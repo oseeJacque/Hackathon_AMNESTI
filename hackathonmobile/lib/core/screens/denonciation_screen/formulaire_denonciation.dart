@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -9,6 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:hackathonmobile/core/screens/app_screens/denonciation_page.dart';
 import 'package:hackathonmobile/core/utils/dynamique_button.dart';
 import 'package:hackathonmobile/core/utils/helper_preferences.dart';
 import 'package:hackathonmobile/core/utils/providers.dart';
@@ -259,6 +262,9 @@ class _FormulaireDenonciationScreenState
                           setState(() {
                             isLoading = false;
                           });
+                          navigateToNextPageWithTransition(
+                              context, const DenonciationPage(),
+                              back: false);
                         }
                       },
                       bgColor: AppColor.blueBgColor,

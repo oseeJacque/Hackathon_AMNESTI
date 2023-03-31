@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -10,6 +12,7 @@ import 'package:flutter_sound/flutter_sound.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hackathonmobile/core/constants/assert.dart';
+import 'package:hackathonmobile/core/screens/app_screens/denonciation_page.dart';
 import 'package:hackathonmobile/core/utils/app_text.dart';
 import 'package:hackathonmobile/core/utils/app_utils_function.dart';
 import 'package:hackathonmobile/core/utils/dynamique_button.dart';
@@ -272,6 +275,9 @@ class _NoteVocalPageState extends ConsumerState<NoteVocalPage> {
                     setState(() {
                       isLoading = false;
                     });
+                    navigateToNextPageWithTransition(
+                        context, const DenonciationPage(),
+                        back: false);
                   } else {
                     toast(
                         "Veuillez enregistrer un audio avant de passer à la traduction !");
