@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -259,8 +260,7 @@ class _NoteVocalPageState extends ConsumerState<NoteVocalPage> {
                     FormData formData = FormData.fromMap({
                       'audio': await MultipartFile.fromFile(filePath,
                           filename: 'song.wav'),
-                      'address':
-                          '${address['pays']} ${address['arrondissement']} ${address['ville']}',
+                      'address': jsonEncode(address),
                       'denonciator_id': idDeno
                     });
                     await ref
