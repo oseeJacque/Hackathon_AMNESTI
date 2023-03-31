@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:hackathonmobile/core/constants/assert.dart';
 import 'package:hackathonmobile/core/screens/denonciation_screen/note_vocal.dart';
@@ -219,6 +221,9 @@ class _DenonciationPageState extends State<DenonciationPage> {
                           'NUMBER', numController.text);
 
                       Navigator.pop(context);
+
+                      navigateToNextPageWithTransition(
+                          context, const ChoisirMoyenPage());
                     } else {
                       logd("Nooooooooo");
                     }

@@ -37,7 +37,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   image_picker: ^0.8.7+1
   dio: ^5.1.0
-  audioplayers: ^3.0.1
   date_format: ^2.0.7
   shared_preferences: ^2.0.15 
   fluttertoast: ^8.0.9
@@ -52,8 +51,14 @@ dependencies:
   google_nav_bar: ^5.0.6
   flutter_riverpod: ^2.3.2
   url_launcher: ^6.1.10
+<<<<<<< HEAD
   
 
+=======
+  flutter_sound: ^9.2.13
+  permission_handler: ^10.2.0
+  path_provider: ^2.0.14
+>>>>>>> 4c60673d824f9b43ea9c5741f9dd2aa1593bf123
   
 
 dev_dependencies:

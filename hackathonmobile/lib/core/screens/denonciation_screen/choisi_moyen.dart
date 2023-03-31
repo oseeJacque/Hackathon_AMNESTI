@@ -1,12 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hackathonmobile/core/constants/assert.dart';
 import 'package:hackathonmobile/core/constants/colors.dart';
 import 'package:hackathonmobile/core/utils/app_text.dart';
+import 'package:hackathonmobile/core/utils/app_utils_function.dart';
 import 'package:hackathonmobile/core/widgets/app_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../../utils/bottom_navigator.dart';
 import '../../widgets/floating_bouton.dart';
-import 'appel.dart';
 import 'formulaire_denonciation.dart';
 import 'note_vocal.dart';
 
@@ -60,40 +62,81 @@ class ChoisirMoyenPage extends StatelessWidget {
               ),
 
               //Note vocal
-              optionsCase(action: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>NoteVocalPage()));
-              }, text: "Note vocal", 
-              urlImage: AssetData.microphone2P,),
+              optionsCase(
+                action: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const NoteVocalPage()));
+                },
+                text: "Note vocal",
+                urlImage: AssetData.microphone2P,
+              ),
               SizedBox(
                 height: height * .05,
               ),
 
               //Appel
-              optionsCase(action: () {
-               
-                 Navigator.push(context, MaterialPageRoute(builder: (context)=> const AppelVocalScreen ()));
+              optionsCase(
+                action: () async {
+                  //Navigator.push(context, MaterialPageRoute(builder: (context)=> const AppelVocalScreen ()));
 
-              }, text: "Appel", 
-              urlImage: AssetData.phonBigP,), 
+                  String phoneNumber = '61024670';
+                  final Uri url = Uri.parse('tel:$phoneNumber');
+
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url);
+                  } else {
+                    toast(
+                        'Impossible de lancer l\'appel pour ce numéro $phoneNumber');
+                  }
+                },
+                text: "Appel",
+                urlImage: AssetData.phonBigP,
+              ),
               SizedBox(
                 height: height * .05,
               ),
 
               //Formulaire
-              optionsCase(action: () {
-                
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> const FormulaireDenonciationScreen ()));
-
-              }, text: "Formulaire", 
-              urlImage: AssetData.receipteditP,),
+              optionsCase(
+                action: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const FormulaireDenonciationScreen()));
+                },
+                text: "Formulaire",
+                urlImage: AssetData.receipteditP,
+              ),
               SizedBox(
                 height: height * .05,
               ),
 
               //Contact  whatsapp
-              optionsCase(action: () {
-              }, text: "Contact whatsapp", 
-              urlImage: AssetData.whatsappP,)
+              optionsCase(
+                action: () async {
+                  String phoneNumber = '+22997028433';
+
+                  var androidUrl =
+                      "whatsapp://send?phone=$phoneNumber&text=Bonjour AMNESTI, besoin d'aide !";
+                  var iosUrl =
+                      "https://wa.me/$phoneNumber?text=${Uri.parse('Bonjour AMNESTI, besoin d\'aide !')}";
+
+                  try {
+                    if (Platform.isIOS) {
+                      await launchUrl(Uri.parse(iosUrl));
+                    } else {
+                      await launchUrl(Uri.parse(androidUrl));
+                    }
+                  } on Exception {
+                    toast('WhatsApp is not installed.');
+                  }
+                },
+                text: "Contact whatsapp",
+                urlImage: AssetData.whatsappP,
+              )
             ],
           ),
         ),
