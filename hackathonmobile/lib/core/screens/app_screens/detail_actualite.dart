@@ -20,7 +20,7 @@ class ActuailiteDetail extends StatelessWidget {
       appBar: MyAppBar(), 
       body: SingleChildScrollView(
         child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 15.0,horizontal: 20.0),
+                    margin: const EdgeInsets.symmetric(vertical: 15.0,horizontal: 20.0),
                   width: double.infinity,
                   height: height,
                   decoration:  BoxDecoration(
@@ -43,7 +43,7 @@ class ActuailiteDetail extends StatelessWidget {
                             color: AppColor.greyColor
                           ),
                           width: double.infinity,
-                          height: height*.3,
+                          height: height*.4,
                           child: Image.asset(data["image"]!,fit:BoxFit.fill,),
                         ), 
                       const SizedBox(height: 10.0,),
