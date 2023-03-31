@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:hackathonmobile/core/utils/dynamique_button.dart';
 import 'package:hackathonmobile/core/widgets/app_bar.dart';
 
 import '../../constants/colors.dart';
@@ -22,7 +23,7 @@ class ActuailiteDetail extends StatelessWidget {
         child: Container(
                     margin: const EdgeInsets.symmetric(vertical: 15.0,horizontal: 20.0),
                   width: double.infinity,
-                  height: height,
+                  height: height*2,
                   decoration:  BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     color: AppColor.backgroundColor,
@@ -43,7 +44,7 @@ class ActuailiteDetail extends StatelessWidget {
                             color: AppColor.greyColor
                           ),
                           width: double.infinity,
-                          height: height*.4,
+                          height: height*.6,
                           child: Image.asset(data["image"]!,fit:BoxFit.fill,),
                         ), 
                       const SizedBox(height: 10.0,),
@@ -58,8 +59,21 @@ class ActuailiteDetail extends StatelessWidget {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: AppText(data["title"]!,color: AppColor.blackColor,weight: FontWeight.w700,size:20 ,)),
-                              
-      
+                                const SizedBox(height: 20.0,),
+                              Text(data["description"]!,style: TextStyle(color: AppColor.blackColor,fontSize: 18.0),), 
+
+                            const SizedBox(height: 30.0,),
+                            //Lire la suite 
+                            Align(
+                              alignment: Alignment.center,
+                              child: DynamiqueButton(
+                                childs: AppText("Lire la suite",color: AppColor.backgroundColor,weight: FontWeight.w700,), 
+                                width: width*.3, 
+                                height: height*.1, 
+                                action: (){}, 
+                                bgColor: AppColor.blueBgColor, 
+                                radius: 10.0),
+                            )
                           ],
                         ),
                       )

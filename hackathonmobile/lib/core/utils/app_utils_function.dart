@@ -30,25 +30,27 @@ class UtilFunctions {
   }
 
 //Show Message dialogue
-  void showMessageDialog(BuildContext context,
+  static void showMessageDialog(BuildContext context,
       {String title = "", String subtitle = ""}) {
     showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
+            scrollable: true,
+            shadowColor: AppColor.blueBgColor,
+          shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0)),
+          backgroundColor: AppColor.backgroundColor,
             title: AppText(
               title,
               color: AppColor.blackColor,
               size: 18,
+              align: TextAlign.center,
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                AppText(
-                  subtitle,
-                  color: AppColor.backgroundColor,
-                  size: 16,
-                ),
+                Text(subtitle,style: TextStyle(color: AppColor.blackColor,fontSize: 18.0),)
               ],
             ),
             actions: [

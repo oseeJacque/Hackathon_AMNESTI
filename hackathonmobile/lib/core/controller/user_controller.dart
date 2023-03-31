@@ -6,7 +6,7 @@ import 'package:hackathonmobile/core/utils/app_utils_function.dart';
 import 'package:hackathonmobile/core/utils/conf_string.dart';
 import 'package:hackathonmobile/core/utils/helper_preferences.dart';
 import 'package:hackathonmobile/core/utils/providers.dart';
-
+/*
 class UserAuth extends ChangeNotifier {
   String token = "";
   UserModel me = UserModel.initial();
@@ -78,4 +78,4 @@ class UserController {
 
     return false;
   }
-}
+}*/

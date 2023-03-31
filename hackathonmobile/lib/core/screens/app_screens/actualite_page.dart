@@ -20,19 +20,19 @@ List actualist=[
 {
   "title":"L’UE doit reconnaître la réalité \ndu crime d’apartheid en Israël",
   "date":"Mardi 20, 2023", 
-  "descrition":"Début mars, une délégation de diplomates européens s’est rendue à Huwara et Zatara, deux villes palestiniennes du gouvernorat de Naplouse, où des colons israéliens se sont livrés à de violentes attaques.Les violences à Huwara et alentour ont choqué par leur ampleur et leur intensité, des centaines de colons israéliens y prenant part.", 
+  "description":"Début mars, une délégation de diplomates européens s’est rendue à Huwara et Zatara, deux villes palestiniennes du gouvernorat de Naplouse, où des colons israéliens se sont livrés à de violentes attaques.Les violences à Huwara et alentour ont choqué par leur ampleur et leur intensité, des centaines de colons israéliens y prenant part.", 
   "image":AssetData.image1P
 }, 
 {
   "title":"L’UE doit reconnaître la réalité \n du crime d’apartheid en Israël",
   "date":"Mardi 20, 2023", 
-  "descrition":"Début mars, une délégation de diplomates européens s’est rendue à Huwara et Zatara, deux villes palestiniennes du gouvernorat de Naplouse, où des colons israéliens se sont livrés à de violentes attaques.Les violences à Huwara et alentour ont choqué par leur ampleur et leur intensité, des centaines de colons israéliens y prenant part.",
+  "description":"Début mars, une délégation de diplomates européens s’est rendue à Huwara et Zatara, deux villes palestiniennes du gouvernorat de Naplouse, où des colons israéliens se sont livrés à de violentes attaques.Les violences à Huwara et alentour ont choqué par leur ampleur et leur intensité, des centaines de colons israéliens y prenant part.",
   "image":AssetData.image2P
 }, 
 {
   "title":"L’UE doit reconnaître la réalité \ndu crime d’apartheid en Israël",
   "date":"Mardi 20, 2023", 
-  "descrition":"Début mars, une délégation de diplomates européens s’est rendue à Huwara et Zatara, deux villes palestiniennes du gouvernorat de Naplouse, où des colons israéliens se sont livrés à de violentes attaques.Les violences à Huwara et alentour ont choqué par leur ampleur et leur intensité, des centaines de colons israéliens y prenant part.", 
+  "description":"Début mars, une délégation de diplomates européens s’est rendue à Huwara et Zatara, deux villes palestiniennes du gouvernorat de Naplouse, où des colons israéliens se sont livrés à de violentes attaques.Les violences à Huwara et alentour ont choqué par leur ampleur et leur intensité, des centaines de colons israéliens y prenant part.", 
   "image":AssetData.image1P
 }
 ];

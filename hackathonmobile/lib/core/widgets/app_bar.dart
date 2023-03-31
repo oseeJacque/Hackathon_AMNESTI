@@ -3,6 +3,7 @@ import 'package:badges/badges.dart' as badges;
 
 import '../constants/assert.dart';
 import '../constants/colors.dart';
+import '../screens/app_screens/notification.dart';
 import '../utils/app_text.dart';
 
 class MyAppBar extends StatelessWidget with PreferredSizeWidget {
@@ -28,7 +29,9 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
             child: badges.Badge(
                 position: badges.BadgePosition.topEnd(top: -10, end: -12),
                 showBadge: true,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const NotificationWidget()));
+                },
                 badgeStyle: badges.BadgeStyle(
                   shape: badges.BadgeShape.square,
                   badgeColor: AppColor.blueBgColor,
