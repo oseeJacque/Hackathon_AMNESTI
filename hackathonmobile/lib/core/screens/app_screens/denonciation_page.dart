@@ -44,6 +44,7 @@ class _DenonciationPageState extends State<DenonciationPage> {
   }
 
   checkNumber() async {
+    //await HelperPreferences.clear();
     bool dispo = await HelperPreferences.checkKey('NUMBER');
     if (dispo) {
       number = await HelperPreferences.retrieveStringValue('NUMBER');

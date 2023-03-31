@@ -194,6 +194,9 @@ class _NoteVocalPageState extends ConsumerState<NoteVocalPage> {
                 width: width * .45,
                 height: height * .15,
                 action: () async {
+                  setState(() {
+                    isLoading = true;
+                  });
                   //Urls
                   String urlDeno =
                       'https://doxamiapi.onrender.com/deno/denonciations/';
@@ -228,32 +231,46 @@ class _NoteVocalPageState extends ConsumerState<NoteVocalPage> {
                       logd('Not authorized');
                     }
                   });
-                  String phone =
-                      await HelperPreferences.retrieveStringValue('NUMBER');
-                      
+
                   //Create denonciator
-                  await ref.read(dio).post(urlDeAc,
-                      data: {'phone': phone, 'address': address}).then((value) {
-                    logd('----------------');
-                    logd(value);
-                  });
+                  bool isDeno = await HelperPreferences.checkKey("DENO");
+                  int idDeno = 0;
+
+                  if (isDeno) {
+                    idDeno = await HelperPreferences.retrieveIntValue("DENO");
+                  } else {
+                    String phone =
+                        await HelperPreferences.retrieveStringValue('NUMBER');
+                    await ref.read(dio).post(urlDeAc, data: {
+                      'phone': phone,
+                      'address': address
+                    }).then((value) async {
+                      idDeno = value.data['id'];
+                      await HelperPreferences.saveIntValue(
+                          "DENO", value.data['id']);
+                      logd(value);
+                    });
+                  }
 
                   //Post File
                   int len = await File(filePath).length();
+                  logd(len);
                   if (len != 0) {
-                    setState(() {
-                      isLoading = true;
-                    });
-
                     FormData formData = FormData.fromMap({
                       'audio': await MultipartFile.fromFile(filePath,
                           filename: 'song.wav'),
-                      'address': 'Cotonou',
+                      'address':
+                          '${address['pays']} ${address['arrondissement']} ${address['ville']}',
+                      'denonciator_id': idDeno
                     });
                     await ref
                         .read(dio)
                         .postFile(body: formData, url: urlDeno)
                         .then((value) => toast('Soumission avec succès !'));
+
+                    setState(() {
+                      isLoading = false;
+                    });
                   } else {
                     toast(
                         "Veuillez enregistrer un audio avant de passer à la traduction !");

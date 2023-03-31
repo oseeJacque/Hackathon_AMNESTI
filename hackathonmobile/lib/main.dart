@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hackathonmobile/core/constants/colors.dart';
-
 import 'core/screens/splashScreen/welcome.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,10 +17,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor:AppColor.backgroundColor,
-        ),
+        scaffoldBackgroundColor: AppColor.backgroundColor,
+      ),
       home: const WelcommePage(),
     );
   }
 }
-

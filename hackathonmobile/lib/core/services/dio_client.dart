@@ -25,6 +25,7 @@ class DioClient {
   Map<String, String> getHeaders1(bool autorisation) {
     Map<String, String> res = {
       'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
     };
     return res;
   }
@@ -67,6 +68,7 @@ class DioClient {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
+      logd(data);
       var response = await dio.post(
         uri,
         data: data,
@@ -151,6 +153,7 @@ class DioClient {
   }) async {
     Response result;
     try {
+      logd(body);
       result = await dio.post(url,
           data: body,
           options: Options(
