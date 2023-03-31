@@ -7,10 +7,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sound/flutter_sound.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:hackathonmobile/core/constants/assert.dart';
 import 'package:hackathonmobile/core/utils/app_text.dart';
 import 'package:hackathonmobile/core/utils/app_utils_function.dart';
 import 'package:hackathonmobile/core/utils/dynamique_button.dart';
+import 'package:hackathonmobile/core/utils/helper_preferences.dart';
 import 'package:hackathonmobile/core/utils/providers.dart';
 import 'package:hackathonmobile/core/widgets/app_bar.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -76,14 +79,12 @@ class _NoteVocalPageState extends ConsumerState<NoteVocalPage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: MyAppBar(
-        back: true
+      appBar: MyAppBar(back: true),
+      floatingActionButton: FloatingActionButtonWidget(
+        rotate: true,
+        action: () {},
+        icon: AssetData.messageQuestionP,
       ),
-     floatingActionButton:FloatingActionButtonWidget(
-       rotate: true,
-      action:(){         
-        }, 
-        icon:AssetData.messageQuestionP,),
 
       //bottomNavigationBar: const BottomNavigationWidget(currentPage: 0,),
 
@@ -193,15 +194,53 @@ class _NoteVocalPageState extends ConsumerState<NoteVocalPage> {
                 width: width * .45,
                 height: height * .15,
                 action: () async {
-                  
+                  //Urls
                   String urlDeno =
                       'https://doxamiapi.onrender.com/deno/denonciations/';
                   String urlDeAc =
                       'https://doxamiapi.onrender.com/deno/denonciators/';
 
+                  //Get location of user
+                  Map<String, String> address = {};
+                  await _determinePosition().then((value) async {
+                    if (value is Position) {
+                      Position pos = value;
+                      address['latitude'] = pos.latitude.toString();
+                      address['longitude'] = pos.longitude.toString();
+
+                      List<Placemark> placemarks =
+                          await placemarkFromCoordinates(
+                        pos.latitude,
+                        pos.longitude,
+                      );
+
+                      if (placemarks.isNotEmpty) {
+                        address['pays'] = placemarks[0].country ?? '';
+                        address['arrondissement'] =
+                            placemarks[0].administrativeArea ?? '';
+                        address['ville'] = placemarks[0].locality ?? '';
+
+                        logd('--------------');
+                        logd(placemarks);
+                      }
+                      logd(address);
+                    } else {
+                      logd('Not authorized');
+                    }
+                  });
+                  String phone =
+                      await HelperPreferences.retrieveStringValue('NUMBER');
+                      
+                  //Create denonciator
+                  await ref.read(dio).post(urlDeAc,
+                      data: {'phone': phone, 'address': address}).then((value) {
+                    logd('----------------');
+                    logd(value);
+                  });
+
+                  //Post File
                   int len = await File(filePath).length();
                   if (len != 0) {
-                    
                     setState(() {
                       isLoading = true;
                     });
@@ -323,5 +362,48 @@ class _NoteVocalPageState extends ConsumerState<NoteVocalPage> {
         ),
       ),
     );
+  }
+
+  Future<dynamic> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          // Permissions are denied, next time you could try
+          // requesting permissions again (this is also where
+          // Android's shouldShowRequestPermissionRationale
+          // returned true. According to Android guidelines
+          // your App should show an explanatory UI now.
+          return false;
+          // Future.error('Location permissions are denied');
+        }
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return false;
+      // Future.error(
+      //     'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
   }
 }
